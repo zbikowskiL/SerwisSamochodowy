@@ -32,8 +32,13 @@
             </ng-template>
         </div>
     </div>
-    <app-total-cost [inputTotalCost]="totalCost" (shownGross)="onShownGross($event)"></app-total-cost>
-    <div class="row" *ngIf="grossCost">
+    <div class="row">
+        <div class="col-sm-12"> 
+            <button class="btn btn-sm btn-primary float-right" (click)="showGross()">SHOWN GROSS</button>
+        </div>
+    </div>
+    <app-total-cost #totalCostRef [inputTotalCost]="totalCost" (shownGross)="onShownGross($event)"></app-total-cost>
+    <div class="row" *ngIf="grossCost && visibleGrossCost">
         <div class="col-sm-12">
             <div class="total-cost">
                 <p class="text-right">GROSS COST: {{grossCost}} PLN</p>
