@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CarsModule } from './cars/cars.module';
 import { CommonModule } from '@angular/common';
+import { CarsService } from './cars/cars.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './coreModule/core.module';
 
 @NgModule({
   declarations: [
@@ -14,9 +17,11 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     CarsModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule,
+    CoreModule
   ],
-  providers: [],
+  providers: [CarsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
