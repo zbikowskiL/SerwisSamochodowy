@@ -20,11 +20,7 @@ export class CarDetailsComponent implements OnInit {
   }
 
   loadCar(){
-    const carId = +this.route.snapshot.params['id'];
-    
-    this.carsService.getCar(carId).subscribe((car) => {
-      this.car = car
-    });
+    this.car = this.route.snapshot.data['carResolve'];
   }
 
 }
