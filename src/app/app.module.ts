@@ -22,7 +22,7 @@ import { CarsRoutingModule } from './cars/cars-routing/cars-routing.module';
     HttpClientModule,
     CoreModule, 
     AppRoutingModule,
-    CarsRoutingModule
+    CarsRoutingModule,
   ],
   providers: [CarsService],
   bootstrap: [AppComponent]
