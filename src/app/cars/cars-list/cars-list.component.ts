@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { CarsService } from '../cars.service';
 import { Car } from '../models/car';
 import { TotalCostComponent } from '../total-cost/total-cost.component';
@@ -11,7 +12,8 @@ import { TotalCostComponent } from '../total-cost/total-cost.component';
 })
 export class CarsListComponent implements OnInit, AfterViewInit {
 
-  constructor(private carsService: CarsService) { }
+  constructor(private carsService: CarsService,
+              private router: Router) { }
 
   @ViewChild("totalCostRef") totalCostRef: TotalCostComponent;
 
@@ -54,5 +56,9 @@ export class CarsListComponent implements OnInit, AfterViewInit {
   showGross(): void {
     this.visibleGrossCost = !this.visibleGrossCost;
     this.totalCostRef.showGross();
+  }
+
+  goToCarDetails(carId: number) {
+    this.router.navigate(['/cars', carId]);
   }
 }
