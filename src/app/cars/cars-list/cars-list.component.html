@@ -54,3 +54,83 @@
         </div>
     </div>
 </div>
+
+<p class="data-header">Add new car</p>
+
+<div class="data-container">
+    <form [formGroup]="carForm">
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label>Model</label>
+                <input formControlName="model" type="text" class="form-control" placeholder="model">
+                <p class="error" *ngIf="!carForm.get('model').valid && carForm.get('model').dirty">This field is required</p>
+            </div>
+            <div class="col-sm-4">
+                <label>Type</label>
+                <input formControlName="type" type="text" class="form-control">
+            </div>
+            <div class="col-sm-4">
+                <label>Plate</label>
+                <input formControlName="plate" type="text" class="form-control">
+                <p class="error" *ngIf="!carForm.get('plate').valid && carForm.get('plate').dirty">This field is required</p>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label>Delivery Date</label>
+                <input formControlName="deliveryDate" type="text" class="form-control" placeholder="model">
+            </div>
+            <div class="col-sm-4">
+                <label>Deadline</label>
+                <input formControlName="deadline" type="text" class="form-control">
+            </div>
+            <div class="col-sm-4">
+                <label>Color</label>
+                <input formControlName="color" type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label>Power</label>
+                <input formControlName="power" type="text" class="form-control" placeholder="model">
+            </div>
+            <div class="col-sm-4">
+                <label>Client Firstname</label>
+                <input formControlName="clientFirstName" type="text" class="form-control">
+            </div>
+            <div class="col-sm-4">
+                <label>Client Surname</label>
+                <input formControlName="clientSurname" type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-sm-4">
+                <label>Cost</label>
+                <input formControlName="cost" type="text" class="form-control" placeholder="model">
+            </div>
+            <div class="col-sm-4">
+                <label>Year</label>
+                <input formControlName="year" type="text" class="form-control" placeholder="yesr">
+            </div>
+            
+            <div class="col-sm-4">
+                <label>Is Fully Damaged
+                    <input formControlName="isFullyDamaged" type="checkbox">
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <button [disabled]="carForm.invalid" type="submit" class="btn btn-danger float-right" (click)="addCar()">Add car</button>
+            </div>
+        </div>       
+    </form>
+
+    <pre> {{ carForm.value | json }} </pre>
+    <pre> Stan walidacji inputa model: {{ carForm.get('model').valid }}</pre>
+    <pre> Stan walidacji inputa plate: {{ carForm.get('plate').valid }}</pre>
+</div>
