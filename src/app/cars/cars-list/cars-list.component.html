@@ -25,10 +25,10 @@
                     <tr *ngFor="let car of cars; let i = index" class="row-car" (click)="goToCarDetails(car.id)">
                         <td [ngClass]="{'row-error': car.isFullyDamaged}">{{ car?.model }}</td>
                         <td>{{ car?.plate }}</td>
-                        <td>{{ car?.deliveryDate }}</td>
-                        <td>{{ car?.deadline }}</td>
-                        <td>{{ car?.clientFirstName }} {{ car?.clientSurname }}</td>
-                        <td>{{ car?.cost }}</td>
+                        <td>{{ car?.deliveryDate | date: 'shortDate' }}</td>
+                        <td>{{ car?.deadline | date: 'shortDate' }}</td>
+                        <td>{{ car?.clientFirstName }} {{ car?.clientSurname | surnameCut }}</td>
+                        <td>{{ car?.cost | currency: 'PLN' : true }}</td>
                         <td>Action PLEACEHOLDER</td>
                     </tr>
                 </tbody>     
