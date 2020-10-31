@@ -45,7 +45,9 @@
             <button class="btn btn-sm btn-primary float-right" (click)="showGross()">SHOWN GROSS</button>
         </div>
     </div>
+    
     <app-total-cost #totalCostRef [inputTotalCost]="totalCost" (shownGross)="onShownGross($event)"></app-total-cost>
+    
     <div class="row" *ngIf="cars && grossCost && visibleGrossCost">
         <div class="col-sm-12">
             <div class="total-cost">
