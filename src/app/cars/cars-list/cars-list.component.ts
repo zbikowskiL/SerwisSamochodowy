@@ -71,6 +71,13 @@ export class CarsListComponent implements OnInit, AfterViewInit {
     this.getAllCars());
   }
 
+  removeCar(id: number, event) : void {
+    event.stopPropagation();
+    this.carsService.deleteCar(id).subscribe(() => {
+      this.getAllCars();
+    });
+  }
+
   buildCarForm() {
     return this.formBuilder.group({
       model: ['', Validators.required],

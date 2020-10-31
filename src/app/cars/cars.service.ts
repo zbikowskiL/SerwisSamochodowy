@@ -30,4 +30,8 @@ export class CarsService {
   updateCar(id: number, data) : Observable<Car>{
     return this.http.put<Car>(this.apiUrl + 'cars/' + `${id}`, data, this.httpOptions);
   }
+
+  deleteCar(id: number) : Observable<Car> {
+    return this.http.delete<Car>(this.apiUrl + 'cars/' + `${id}`, {responseType: 'json'});
+  }
 } 
