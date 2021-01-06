@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild } from '
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CarsService } from '../cars.service';
+import { CostSharedService } from '../cost-shared.service';
 import { Car } from '../models/car';
 import { TotalCostComponent } from '../total-cost/total-cost.component';
 
@@ -15,6 +16,7 @@ export class CarsListComponent implements OnInit, AfterViewInit {
 
   constructor(private carsService: CarsService,
     private formBuilder: FormBuilder,
+    private costSharedService: CostSharedService,
     private router: Router) { }
 
   @ViewChild("totalCostRef") totalCostRef: TotalCostComponent;
@@ -39,7 +41,9 @@ export class CarsListComponent implements OnInit, AfterViewInit {
     this.carsService.getCars().subscribe((cars) => {
       this.cars = cars;
       this.countTotalCost();
+      this.costSharedService.sharedCost(this.totalCost);
     });
+
   }
 
   countTotalCost(): void {
@@ -50,7 +54,6 @@ export class CarsListComponent implements OnInit, AfterViewInit {
     } else {
       this.totalCost = 0;
     }
-
   }
 
   onShownGross(eventGrossCost: number): void {

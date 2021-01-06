@@ -5,7 +5,9 @@
                 <span *ngIf="isCostToLow" class="warrning-totalCost">
                     WARNING! COST IS LOWER THAN {{ costThreshold }}! 
                 </span>
-                TOTAL COST: {{inputTotalCost}} PLN</p>
+                TOTAL COST: {{inputTotalCost}} PLN
+            </p>
+            <app-income-tax></app-income-tax>
         </div>
     </div>
 </div>
