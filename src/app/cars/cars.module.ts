@@ -9,11 +9,12 @@ import { CarResolve } from '../cars/car-resolve.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IncomeTaxComponent } from './total-cost/income-tax/income-tax.component';
 import { CostSharedService } from './cost-shared.service';
+import { CarTableRowComponent } from './car-table-row/car-table-row.component';
 
 
 
 @NgModule({
-  declarations: [CarsListComponent, TotalCostComponent, CarDetailsComponent, IncomeTaxComponent],
+  declarations: [CarsListComponent, TotalCostComponent, CarDetailsComponent, IncomeTaxComponent, CarTableRowComponent],
   imports: [
     CommonModule,
     SharedModule,

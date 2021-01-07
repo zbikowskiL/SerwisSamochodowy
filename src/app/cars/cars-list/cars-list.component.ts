@@ -74,8 +74,7 @@ export class CarsListComponent implements OnInit, AfterViewInit {
     this.getAllCars());
   }
 
-  removeCar(id: number, event) : void {
-    event.stopPropagation();
+  removeCar(id: number) : void {
     this.carsService.deleteCar(id).subscribe(() => {
       this.getAllCars();
     });
