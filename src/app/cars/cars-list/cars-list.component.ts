@@ -1,6 +1,7 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CarTableRowComponent } from '../car-table-row/car-table-row.component';
 import { CarsService } from '../cars.service';
 import { CostSharedService } from '../cost-shared.service';
 import { Car } from '../models/car';
@@ -20,6 +21,7 @@ export class CarsListComponent implements OnInit, AfterViewInit {
     private router: Router) { }
 
   @ViewChild("totalCostRef") totalCostRef: TotalCostComponent;
+  @ViewChildren(CarTableRowComponent) carRows: QueryList<CarTableRowComponent>;
 
   totalCost: number;
   grossCost: number;
@@ -35,6 +37,14 @@ export class CarsListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.showGross();
+
+    this.carRows.changes.subscribe(() => {
+      if (this.carRows.some(x => x.car.cost > 10000)) {
+        this.carRows.forEach(c => {
+          console.log(`Warning, cost repair ${c.car.model} plate ${c.car.plate} is the highest than 10.000 zł.`);
+        })
+      }
+    })
   }
 
   getAllCars(): void {
@@ -71,10 +81,10 @@ export class CarsListComponent implements OnInit, AfterViewInit {
 
   addCar() {
     this.carsService.addCar(this.carForm.value).subscribe(() =>
-    this.getAllCars());
+      this.getAllCars());
   }
 
-  removeCar(id: number) : void {
+  removeCar(id: number): void {
     this.carsService.deleteCar(id).subscribe(() => {
       this.getAllCars();
     });
