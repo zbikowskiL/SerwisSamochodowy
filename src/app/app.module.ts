@@ -1,14 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { CarsModule, CarsService, CarsRoutingModule } from './cars/export';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CarsModule } from './cars/cars.module';
 import { CommonModule } from '@angular/common';
-import { CarsService } from './cars/cars.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './coreModule/core.module';
-import { CarsRoutingModule } from './cars/cars-routing/cars-routing.module';
 
 @NgModule({
   declarations: [
