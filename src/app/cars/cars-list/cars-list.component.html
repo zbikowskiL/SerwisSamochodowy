@@ -117,7 +117,7 @@
             
             <div class="col-sm-4">
                 <label>Is Fully Damaged
-                    <input formControlName="isFullyDamaged" type="checkbox">
+                    <input formControlName="isFullyDamaged" type="checkbox" (change)="togglePlateValidity()">
                 </label>
             </div>
         </div>
