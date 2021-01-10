@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CarsServiceValidators } from 'src/app/sharedModule/CarsServiceValidator';
 import { CarTableRowComponent } from '../car-table-row/car-table-row.component';
 import { CarsService } from '../cars.service';
 import { CostSharedService } from '../cost-shared.service';
@@ -98,7 +99,7 @@ export class CarsListComponent implements OnInit, AfterViewInit {
       deliveryDate: ' ',
       deadline: ' ',
       color: ' ',
-      power: ' ',
+      power: ['', CarsServiceValidators.power],
       clientFirstName: ' ',
       clientSurname: ' ',
       cost: ' ',
