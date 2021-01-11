@@ -123,23 +123,33 @@
             </div>
         </div>
 
-        <div formGroupName="parts" class="row form-group part-group">
-            <div class="col-sm-4">
-                <label>Part name</label>
-                <input formControlName="name" type="text" class="form-control" placeholder="part name">
-            </div>
-            <div class="col-sm-4">
-                <label>Price</label>
-                <input formControlName="price" type="text" class="form-control" placeholder="price">
-            </div>
-            
-            <div class="col-sm-4">
-                <label>Is in stock
-                    <input formControlName="inStock" type="checkbox" >
-                </label>
+        <div formArrayName="parts" *ngFor="let part of parts.controls; let i = index">
+            <div [formGroupName]="i" class="part-group">
+                <div class="row">
+                    <div class="col-12">
+                        <h5>{{ i + 1 }} {{ part.value.name }} {{ part.value.price | currency: 'PLN' : true }}</h5>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-4">
+                        <label>Part name</label>
+                        <input formControlName="name" type="text" class="form-control" placeholder="part name">
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Price</label>
+                        <input formControlName="price" type="text" class="form-control" placeholder="price">
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Is in stock
+                            <input formControlName="inStock" type="checkbox" >
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <button class="btn btn-primary" (click)="addPart()">Add part</button>
+        
         <div class="row">
             <div class="col-sm-12">
                 <button [disabled]="carForm.invalid" type="submit" class="btn btn-danger float-right" (click)="addCar()">Add car</button>
