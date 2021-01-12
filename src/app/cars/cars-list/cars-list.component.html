@@ -126,8 +126,10 @@
         <div formArrayName="parts" *ngFor="let part of parts.controls; let i = index">
             <div [formGroupName]="i" class="part-group">
                 <div class="row">
-                    <div class="col-12">
-                        <h5>{{ i + 1 }} {{ part.value.name }} {{ part.value.price | currency: 'PLN' : true }}</h5>
+                    <div class="col-12" >
+                        <h5 >{{ i + 1 }} {{ part.value.name }} {{ part.value.price | currency: 'PLN' : true }}
+                            <span (click)="removePart(i)" class="btn btn-danger float-right">( X )</span>
+                        </h5>
                     </div>
                 </div>
                 <div class="row form-group">
