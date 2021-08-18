@@ -1,0 +1,7 @@
+<td appCsImportant [ngClass]="{'row-error': car.isFullyDamaged}">{{ car?.model }}</td>
+<td>{{ car?.plate }}</td>
+<td>{{ car?.deliveryDate | date: 'shortDate' }}</td>
+<td>{{ car?.deadline | date: 'shortDate' }}</td>
+<td>{{ car?.clientFirstName }} {{ car?.clientSurname | surnameCut }}</td>
+<td appCsImportant >{{ car?.cost | currency: 'PLN' : true }}</td>
+<td (click)="removeCar(car?.id, $event)">( X )</td>

@@ -1,15 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { CarsModule, CarsService, CarsRoutingModule } from './cars/export';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CarsModule } from './cars/cars.module';
 import { CommonModule } from '@angular/common';
-import { CarsService } from './cars/cars.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './coreModule/core.module';
-import { RouterModule } from '@angular/router';
-import { CarsListComponent } from './cars/cars-list/cars-list.component';
+import { LoginRoutingModule } from './login/login-routing.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -21,10 +21,11 @@ import { CarsListComponent } from './cars/cars-list/cars-list.component';
     CarsModule,
     CommonModule,
     HttpClientModule,
-    CoreModule,
-    RouterModule.forRoot([
-      { path: 'cars', component: CarsListComponent }
-    ])
+    CoreModule, 
+    LoginModule,
+    AppRoutingModule,
+    CarsRoutingModule,
+    LoginRoutingModule
   ],
   providers: [CarsService],
   bootstrap: [AppComponent]

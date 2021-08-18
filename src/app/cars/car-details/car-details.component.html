@@ -1,60 +1,12 @@
 <app-header>
-    <p levels>cars</p>
+    <p levels>cars | {{car?.model}}</p>
 
     <div content>
         <p>Some text</p>
     </div>
 </app-header>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <table *ngIf="cars && cars.length > 0; else noCarsInfo" class="cs-table table table-striped">
-                <thead>
-                    <tr>
-                        <th>car</th>
-                        <th>plate</th>
-                        <th>delivery date</th>
-                        <th>deadline</th>
-                        <th>client</th>
-                        <th>cost</th>
-                        <th>action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let car of cars; let i = index" 
-                        class="row-car" 
-                        (click)="goToCarDetails(car.id)"
-                        app-car-table-row [car]="car" 
-                        (removedCar)="removeCar(car.id)"
-                    ></tr>
-                </tbody>     
-            </table>
-            <ng-template #noCarsInfo>
-                <div class="no-car-info">
-                    <p>Currently there are no cars in the service</p>
-                </div>
-            </ng-template>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12"> 
-            <button class="btn btn-sm btn-primary float-right" (click)="showGross()">SHOWN GROSS</button>
-        </div>
-    </div>
-    
-    <app-total-cost #totalCostRef [inputTotalCost]="totalCost" (shownGross)="onShownGross($event)"></app-total-cost>
-    
-    <div class="row" *ngIf="cars && grossCost && visibleGrossCost">
-        <div class="col-sm-12">
-            <div class="total-cost">
-                <p class="text-right">GROSS COST: {{grossCost}} PLN</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<p class="data-header">Add new car</p>
+<p class="data-header">Edit car {{ car.model }}</p>
 
 <div class="data-container">
     <form [formGroup]="carForm">
@@ -78,11 +30,11 @@
         <div class="row form-group">
             <div class="col-sm-4">
                 <label>Delivery Date</label>
-                <input formControlName="deliveryDate" type="date" class="form-control" placeholder="model">
+                <input formControlName="deliveryDate" type="date" class="form-control" placeholder="model" value="">
             </div>
             <div class="col-sm-4">
                 <label>Deadline</label>
-                <input formControlName="deadline" type="date" class="form-control">
+                <input formControlName="deadline" type="date" class="form-control" value="">
             </div>
             <div class="col-sm-4">
                 <label>Color</label>
@@ -93,8 +45,7 @@
         <div class="row form-group">
             <div class="col-sm-4">
                 <label>Power</label>
-                <input formControlName="power" type="number" class="form-control" placeholder="model">
-                <p class="error" *ngIf="carForm.get('power').errors?.power && carForm.get('power').dirty">Power must be between 50 PS and 800 PS.</p>
+                <input formControlName="power" type="text" class="form-control" placeholder="model">
             </div>
             <div class="col-sm-4">
                 <label>Client Firstname</label>
@@ -109,12 +60,12 @@
         <div class="row form-group">
             <div class="col-sm-4">
                 <label>Year</label>
-                <input formControlName="year" type="text" class="form-control" placeholder="yesr">
+                <input formControlName="year" type="text" class="form-control" placeholder="year">
             </div>
             
             <div class="col-sm-4">
                 <label>Is Fully Damaged
-                    <input formControlName="isFullyDamaged" type="checkbox" (change)="togglePlateValidity()">
+                    <input formControlName="isFullyDamaged" type="checkbox">
                 </label>
             </div>
         </div>
@@ -147,10 +98,10 @@
         </div>
 
         <button class="btn btn-primary" (click)="addPart()">Add part</button>
-        
+
         <div class="row">
             <div class="col-sm-12">
-                <button [disabled]="carForm.invalid" type="submit" class="btn btn-danger float-right" (click)="addCar()">Add car</button>
+                <button [disabled]="carForm.invalid" type="submit" class="btn btn-danger float-right" (click)="updateCar()">Update car</button>
             </div>
         </div>       
     </form>

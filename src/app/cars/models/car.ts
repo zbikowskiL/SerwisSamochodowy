@@ -12,4 +12,6 @@ export interface Car {
     clientSurname: string,
     cost: number,
     isFullyDamaged: boolean
+    year: number,
+    parts: Object[]
 }
