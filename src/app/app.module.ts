@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './coreModule/core.module';
+import { LoginRoutingModule } from './login/login-routing.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,10 @@ import { CoreModule } from './coreModule/core.module';
     CommonModule,
     HttpClientModule,
     CoreModule, 
+    LoginModule,
     AppRoutingModule,
     CarsRoutingModule,
+    LoginRoutingModule
   ],
   providers: [CarsService],
   bootstrap: [AppComponent]

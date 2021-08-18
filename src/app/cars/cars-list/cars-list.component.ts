@@ -81,8 +81,16 @@ export class CarsListComponent implements OnInit, AfterViewInit {
   }
 
   addCar() {
-    this.carsService.addCar(this.carForm.value).subscribe(() =>
+    let carFromData = Object.assign({}, this.carForm.value);
+    carFromData.cost = this.getTotalPartsCost(carFromData.parts);
+    this.carsService.addCar(carFromData).subscribe(() =>
       this.getAllCars());
+  }
+
+  getTotalPartsCost(parts){
+    return parts.reduce((prev, nextPart) =>{
+      return parseFloat(prev) + parseFloat(nextPart.price);
+    }, 0);
   }
 
   removeCar(id: number): void {
@@ -102,7 +110,6 @@ export class CarsListComponent implements OnInit, AfterViewInit {
       power: ['', CarsServiceValidators.power],
       clientFirstName: ' ',
       clientSurname: ' ',
-      cost: ' ',
       isFullyDamaged: "true",
       year: '',
       parts: this.formBuilder.array([])

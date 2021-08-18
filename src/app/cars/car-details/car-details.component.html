@@ -30,11 +30,11 @@
         <div class="row form-group">
             <div class="col-sm-4">
                 <label>Delivery Date</label>
-                <input formControlName="deliveryDate" type="text" class="form-control" placeholder="model">
+                <input formControlName="deliveryDate" type="date" class="form-control" placeholder="model" value="">
             </div>
             <div class="col-sm-4">
                 <label>Deadline</label>
-                <input formControlName="deadline" type="text" class="form-control">
+                <input formControlName="deadline" type="date" class="form-control" value="">
             </div>
             <div class="col-sm-4">
                 <label>Color</label>
@@ -59,12 +59,8 @@
 
         <div class="row form-group">
             <div class="col-sm-4">
-                <label>Cost</label>
-                <input formControlName="cost" type="text" class="form-control" placeholder="model">
-            </div>
-            <div class="col-sm-4">
                 <label>Year</label>
-                <input formControlName="year" type="text" class="form-control" placeholder="yesr">
+                <input formControlName="year" type="text" class="form-control" placeholder="year">
             </div>
             
             <div class="col-sm-4">
@@ -74,9 +70,38 @@
             </div>
         </div>
 
+        <div formArrayName="parts" *ngFor="let part of parts.controls; let i = index">
+            <div [formGroupName]="i" class="part-group">
+                <div class="row">
+                    <div class="col-12" >
+                        <h5 >{{ i + 1 }} {{ part.value.name }} {{ part.value.price | currency: 'PLN' : true }}
+                            <span (click)="removePart(i)" class="btn btn-danger float-right">( X )</span>
+                        </h5>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-4">
+                        <label>Part name</label>
+                        <input formControlName="name" type="text" class="form-control" placeholder="part name">
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Price</label>
+                        <input formControlName="price" type="text" class="form-control" placeholder="price">
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Is in stock
+                            <input formControlName="inStock" type="checkbox" >
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" (click)="addPart()">Add part</button>
+
         <div class="row">
             <div class="col-sm-12">
-                <button [disabled]="carForm.invalid" type="submit" class="btn btn-danger float-right" (click)="updateCar()">Add car</button>
+                <button [disabled]="carForm.invalid" type="submit" class="btn btn-danger float-right" (click)="updateCar()">Update car</button>
             </div>
         </div>       
     </form>
