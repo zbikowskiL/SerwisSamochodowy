@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './coreModule/core.module';
 import { LoginRoutingModule } from './login/login-routing.module';
 import { LoginModule } from './login/login.module';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,7 @@ import { LoginModule } from './login/login.module';
     CarsRoutingModule,
     LoginRoutingModule
   ],
-  providers: [CarsService],
+  providers: [CarsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
