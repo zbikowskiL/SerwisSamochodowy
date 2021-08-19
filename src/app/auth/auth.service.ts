@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { LayoutService } from '../sharedModule/services/layout.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  constructor(private layoutService: LayoutService){ }
 
   private credentials = {
     login: 'admin',
@@ -16,6 +19,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       if (login === this.credentials.login && password === this.credentials.password){
         this.isUserLoggedIn = true;
+        this.layoutService.showSidebar();
         resolve('Success!')
       }else{
         reject();
@@ -25,6 +29,11 @@ export class AuthService {
 
   isLoggedIn(){
     return this.isUserLoggedIn;
+  }
+
+  logOut(){
+    this.isUserLoggedIn = false;
+    this.layoutService.hideSidebar();
   }
 
 }

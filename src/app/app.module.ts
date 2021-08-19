@@ -12,6 +12,7 @@ import { LoginRoutingModule } from './login/login-routing.module';
 import { LoginModule } from './login/login.module';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
+import { LayoutService } from './sharedModule/services/layout.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { AuthService } from './auth/auth.service';
     CarsRoutingModule,
     LoginRoutingModule
   ],
-  providers: [CarsService, AuthService, AuthGuard],
+  providers: [CarsService, AuthService, AuthGuard, LayoutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
