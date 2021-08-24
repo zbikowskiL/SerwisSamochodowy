@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CanDeactivateComponent } from 'src/app/auth/form-can-deactivate.guard';
 import { CarsService } from '../cars.service';
 import { Car } from '../models/car';
 
@@ -9,7 +11,7 @@ import { Car } from '../models/car';
   templateUrl: './car-details.component.html',
   styleUrls: ['./car-details.component.less']
 })
-export class CarDetailsComponent implements OnInit {
+export class CarDetailsComponent implements OnInit, CanDeactivateComponent {
 
   car : Car;
   carForm: FormGroup;
@@ -82,5 +84,13 @@ export class CarDetailsComponent implements OnInit {
     this.parts.removeAt(i);
   }
 
+  
+  CanDeactivet(){
+    if(!this.carForm.dirty){
+      return true;
+    }
+
+    return window.confirm('Discard changes?');
+  }
 
 }

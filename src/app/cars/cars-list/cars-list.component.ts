@@ -1,20 +1,21 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CanDeactivateComponent } from 'src/app/auth/form-can-deactivate.guard';
 import { CarsServiceValidators } from 'src/app/sharedModule/CarsServiceValidator';
 import { CarTableRowComponent } from '../car-table-row/car-table-row.component';
 import { CarsService } from '../cars.service';
 import { CostSharedService } from '../cost-shared.service';
 import { Car } from '../models/car';
 import { TotalCostComponent } from '../total-cost/total-cost.component';
-
 @Component({
   selector: 'app-cars-list',
   templateUrl: './cars-list.component.html',
   styleUrls: ['./cars-list.component.less'],
   encapsulation: ViewEncapsulation.None
 })
-export class CarsListComponent implements OnInit, AfterViewInit {
+export class CarsListComponent implements OnInit, AfterViewInit, CanDeactivateComponent {
 
   constructor(private carsService: CarsService,
     private formBuilder: FormBuilder,
@@ -147,5 +148,14 @@ export class CarsListComponent implements OnInit, AfterViewInit {
     }
 
     plateControl.updateValueAndValidity();
+  }
+
+  
+  CanDeactivet(){
+    if(!this.carForm.dirty){
+      return true;
+    }
+
+    return window.confirm('Discard changes?');
   }
 }

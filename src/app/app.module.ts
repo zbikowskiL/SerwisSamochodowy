@@ -13,6 +13,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { LayoutService } from './sharedModule/services/layout.service';
 import { AuthCanLoadGuard } from './auth/auth-can-load.guard';
+import { FormCanDeacvivateGuard } from './auth/form-can-deactivate.guard';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { AuthCanLoadGuard } from './auth/auth-can-load.guard';
     LoginModule,
     AppRoutingModule
   ],
-  providers: [CarsService, AuthService, AuthGuard, AuthCanLoadGuard, LayoutService],
+  providers: [CarsService, AuthService, AuthGuard, FormCanDeacvivateGuard, AuthCanLoadGuard, LayoutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
+import { FormCanDeacvivateGuard } from 'src/app/auth/form-can-deactivate.guard';
 import { CarDetailsComponent } from '../car-details/car-details.component';
 import { CarResolve } from '../car-resolve.service';
 import { CarsListComponent } from '../cars-list/cars-list.component';
@@ -13,10 +14,12 @@ const CARS_ROUTES: Route[] = [
       {
         path: '',
         component: <any> CarsListComponent,
+        canDeactivate: [FormCanDeacvivateGuard]
       },
       {
         path: ':id',
         component: <any> CarDetailsComponent,
+        canDeactivate: [FormCanDeacvivateGuard],
         resolve: { carResolve : CarResolve }
       }
     ]
