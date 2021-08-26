@@ -6,6 +6,10 @@ const LOGIN_ROUTES: Route[] = [
   {
     path: 'login', 
     component: LoginComponent
+  },
+  {
+    path: '',
+    component: LoginComponent
   }
 ];
 

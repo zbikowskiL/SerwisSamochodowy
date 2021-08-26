@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ViewChildren, QueryList, Renderer2, ElementRef, RendererStyleFlags2 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -19,10 +19,12 @@ export class CarsListComponent implements OnInit, AfterViewInit, CanDeactivateCo
 
   constructor(private carsService: CarsService,
     private formBuilder: FormBuilder,
+    private renderer: Renderer2,
     private costSharedService: CostSharedService,
     private router: Router) { }
 
   @ViewChild("totalCostRef") totalCostRef: TotalCostComponent;
+  @ViewChild('addCarTitle') addCarTitle: ElementRef;
   @ViewChildren(CarTableRowComponent) carRows: QueryList<CarTableRowComponent>;
 
   totalCost: number;
@@ -38,6 +40,17 @@ export class CarsListComponent implements OnInit, AfterViewInit, CanDeactivateCo
   }
 
   ngAfterViewInit() {
+    const addCarTitle = this.addCarTitle.nativeElement;
+
+    this.carForm.valueChanges.subscribe(() => {
+      if (this.carForm.invalid) {
+        this.renderer.setStyle(addCarTitle, 'color', 'red', RendererStyleFlags2.Important);
+      } else {
+        this.renderer.setStyle(addCarTitle, 'color', 'white', RendererStyleFlags2.Important);
+      }
+    });
+
+
     this.showGross();
 
     this.carRows.changes.subscribe(() => {

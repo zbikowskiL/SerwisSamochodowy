@@ -14,6 +14,7 @@ import { AuthService } from './auth/auth.service';
 import { LayoutService } from './sharedModule/services/layout.service';
 import { AuthCanLoadGuard } from './auth/auth-can-load.guard';
 import { FormCanDeacvivateGuard } from './auth/form-can-deactivate.guard';
+import { SharedModule } from './sharedModule/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FormCanDeacvivateGuard } from './auth/form-can-deactivate.guard';
     HttpClientModule,
     CoreModule, 
     LoginModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [CarsService, AuthService, AuthGuard, FormCanDeacvivateGuard, AuthCanLoadGuard, LayoutService],
   bootstrap: [AppComponent]
