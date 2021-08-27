@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CanDeactivateComponent } from 'src/app/auth/form-can-deactivate.guard';
 import { CarsService } from '../cars.service';
 import { Car } from '../models/car';
+import { DateInfoComponent } from './date-info/date-info.component';
 
 @Component({
   selector: 'app-car-details',
@@ -13,17 +14,41 @@ import { Car } from '../models/car';
 })
 export class CarDetailsComponent implements OnInit, CanDeactivateComponent {
 
+  @ViewChild('dateInfoContainer', {read: ViewContainerRef}) dateInfoContainer : ViewContainerRef;
+  dateInfoRef : ComponentRef<DateInfoComponent>;
   car : Car;
   carForm: FormGroup;
+  elapsedDays: number;
+  
 
   constructor(private carsService: CarsService,
               private formBuilder: FormBuilder,
+              private componentFactoryResolver: ComponentFactoryResolver,
               private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.loadCar();
     this.carForm = this.buildCarForm();
+  }
+
+  createDateInfoComponent() {
+    
+    if (this.dateInfoContainer.get(0) !== null){
+      return;
+    }
+
+    const dateinfoFactory = this.componentFactoryResolver.resolveComponentFactory(DateInfoComponent);
+    this.dateInfoRef = <ComponentRef<DateInfoComponent>>this.dateInfoContainer.createComponent(dateinfoFactory);
+    this.dateInfoRef.instance.car = this.car;
+    this.dateInfoRef.instance.checkElapsedDays.subscribe((elapsedDays) =>{
+      this.elapsedDays = elapsedDays;
+    })
+  }
+
+  clearDateInfoComponent() {
+    this.dateInfoRef.destroy()
+    this.dateInfoRef = null;
   }
 
   buildCarForm() {

@@ -1,10 +1,21 @@
 <app-header>
-    <p levels>cars | {{car?.model}}</p>
+    <p levels>cars | {{car?.model}} <span *ngIf="elapsedDays"> | {{ elapsedDays }} days in service!</span></p>
 
     <div content>
         <p>Some text</p>
     </div>
 </app-header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <button (click)="createDateInfoComponent()" class="btn btn-danger">Show date info</button>
+            <button *ngIf="dateInfoRef" (click)="clearDateInfoComponent()" class="btn btn-danger" style="margin-left: 5px;">Hide date info</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #dateInfoContainer></ng-template>
 
 <p class="data-header">Edit car {{ car.model }}</p>
 
